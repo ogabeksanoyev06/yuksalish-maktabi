@@ -1,0 +1,63 @@
+.app-input {
+  $self: &;
+  --height: 36px;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 6px;
+  position: relative;
+  cursor: text;
+  user-select: none;
+  &:before {
+    transition: border 0.15s linear;
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    border: 1px solid rgba(24, 24, 24, 0.2);
+  }
+  &__prepend {
+    flex-shrink: 0;
+    margin-left: 15px;
+    margin-right: 2px;
+  }
+  &__append {
+    flex-shrink: 0;
+    margin-left: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  &__field {
+    width: 10px;
+    flex-grow: 1;
+    padding: 0 10px;
+    height: var(--height);
+    border: 0;
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 600;
+    @include placeholder {
+      font: inherit;
+      color: rgba(24, 24, 24, 0.4);
+    }
+  }
+  &--focused {
+    &:before {
+      border-color: $color-main;
+    }
+  }
+  &--width {
+    width: var(--width);
+  }
+  @each $height in 36, 53 {
+    &--hg-#{$height} {
+      --height: #{$height}px;
+    }
+  }
+}

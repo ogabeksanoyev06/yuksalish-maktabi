@@ -1,0 +1,72 @@
+@import '../../styles/abstracts/variables';
+
+.checkbox {
+  $self: &;
+  display: block;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  &__input {
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+  }
+  &__title {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    &:before {
+      flex-shrink: 0;
+      display: block;
+      content: '';
+      width: var(--size);
+      height: var(--size);
+      border-radius: 4px;
+      background: $border-color center/10px 10px no-repeat;
+      border: 1px solid #E2E3E5;
+    }
+  }
+  &__input:checked ~ &__title {
+    &:before {
+      background-color: $color-secondary;
+      background-image: url('../../../../public/svg/check.svg');
+      background-size: contain;
+      border-color: $color-secondary;
+    }
+  }
+  &__text {
+    margin-left: 13px;
+  }
+  &:after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    bottom: -5px;
+    left: -5px;
+  }
+  &--theme-light {
+    #{$self}__title {
+      color: #9596AF;
+    }
+    #{$self}__input:checked ~ #{$self}__title {
+      &:before {
+        background-color: $color-secondary;
+        border-color: $color-main;
+      }
+    }
+  }
+  &--theme-radio {
+    #{$self}__title:before {
+      border-radius: 100%;
+      background: #FFFFFF center/10px 10px no-repeat;
+    }
+    #{$self}__input:checked ~ #{$self}__title:before {
+      background-color: #fff;
+      border: 4px solid $color-secondary;
+    }
+  }
+}

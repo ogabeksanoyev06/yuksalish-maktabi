@@ -1,0 +1,331 @@
+@import "animations";
+@import "../abstracts/variables";
+
+.overflow {
+  overflow: hidden;
+}
+
+.bold-text {
+  font-weight: 700;
+  font-family: "Gilroy", sans-serif;
+}
+
+.link-title {
+  --color-hover: #{$color-danger};
+  $transition: 0.13s;
+  $self: &;
+  transition: color #{$transition} linear;
+  cursor: pointer;
+  user-select: none;
+
+  &[disabled] {
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  &--active-main {
+    --color-hover: #{$color-main};
+  }
+
+  &--underline {
+    background: linear-gradient(90deg, currentColor, currentColor) bottom/100%
+      1px no-repeat;
+    @include has-hover {
+      transition: background #{$transition} ease-out;
+      &:hover {
+        background: linear-gradient(90deg, currentColor, currentColor) bottom/0
+          1px no-repeat;
+      }
+    }
+  }
+
+  &--active-underline {
+    @include has-hover {
+      transition: background #{$transition} ease-out;
+      background: linear-gradient(90deg, currentColor, currentColor) bottom/0
+        1px no-repeat;
+      &:hover {
+        background: linear-gradient(90deg, currentColor, currentColor)
+          bottom/100% 1px no-repeat;
+      }
+    }
+  }
+
+  &:not(&--active-no-color) {
+    @include has-hover {
+      &:hover {
+        color: var(--color-hover);
+      }
+    }
+  }
+
+  &--icon {
+    display: flex;
+    align-items: center;
+
+    #{$self}__icon-left,
+    #{$self}__icon-right {
+      transition: transform $transition ease-out;
+    }
+
+    #{$self}__icon-left {
+      margin-right: 5px;
+    }
+
+    #{$self}__icon-right {
+      margin-left: 5px;
+    }
+  }
+
+  &--sizer {
+    position: relative;
+
+    &:before {
+      display: block;
+      content: "";
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      bottom: -5px;
+      left: -5px;
+    }
+  }
+}
+
+.color-main {
+  color: $color-main;
+}
+
+.color-secondary {
+  color: $color-secondary;
+}
+
+.color-text {
+  color: $color-text;
+}
+
+.color-danger {
+  color: $color-danger;
+}
+
+.science-categories {
+  .app-card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid $border-color;
+    border-radius: 16px;
+    transform: unset !important;
+    min-height: 70px;
+    box-shadow: none;
+
+    &:hover {
+      .app-card__photo {
+        img {
+          transform: unset;
+        }
+      }
+    }
+  }
+
+  .app-card__title {
+    margin-bottom: 0;
+    font-size: 16px;
+  }
+
+  .app-card__photo {
+    width: 62px;
+    max-height: 30px;
+    margin-right: 20px;
+    margin-bottom: 0;
+
+    img {
+      object-fit: contain;
+      width: 100%;
+    }
+  }
+
+  .app-card__content {
+    border: none;
+    padding: 0;
+  }
+
+  .app-slider {
+    &__button-next,
+    &__button-previous {
+      top: 50%;
+    }
+  }
+}
+
+.section {
+  &__top {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    &-details {
+      margin-left: auto;
+    }
+    &-link {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 130%;
+      color: #3165cb !important;
+      padding: 11px 28px;
+      background: rgba(49, 101, 203, 0.1);
+      border-radius: 8px;
+      border: 1px solid rgba(49, 101, 203, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      &:hover {
+        color: $color-text;
+      }
+    }
+  }
+}
+
+.block__item {
+  border: 1px solid $border-color;
+  border-radius: 15px;
+  transition: 0.3s;
+
+  &:hover {
+    border-color: transparent;
+    box-shadow: 0px 8px 36px rgba(70, 93, 122, 0.08);
+  }
+}
+
+.greyBg {
+  background-color: rgb(8, 15, 70);
+}
+
+.radius {
+  border-radius: 10px;
+}
+
+.app-block {
+  width: 100%;
+}
+
+.shadowed {
+  box-shadow: 0 8px 20px rgba(70, 93, 122, 0.08);
+}
+
+.bordered {
+  border: 1px solid $border-color !important;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
+.weight-700 {
+  font-weight: 700;
+  font-family: "Gilroy", sans-serif;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+
+  &__main {
+    max-width: calc(100% - 420px);
+    width: 100%;
+    overflow: hidden;
+
+    &.lg {
+      max-width: calc(100% - 270px);
+    }
+  }
+}
+
+.sidebar {
+  max-width: 390px;
+  width: 100%;
+
+  &.sm {
+    max-width: 210px;
+    width: 100%;
+  }
+
+  &__menu {
+    &-item {
+      width: 100%;
+      padding: 10px 20px;
+      color: $color-text;
+      font-weight: 700;
+      text-align: left;
+      transition: 0.3s;
+      border-radius: 10px;
+      margin-bottom: 5px;
+      line-height: 26px;
+
+      &.active {
+        background: #edf5ff;
+        color: $text-color-default;
+      }
+
+      &:hover {
+        background: #edf5ff;
+        color: $text-color-default;
+      }
+    }
+  }
+}
+
+.custom__btn {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: white;
+  color: $color-text;
+  cursor: pointer;
+  border-radius: 10px;
+  line-height: normal;
+  font-weight: 500;
+  font-family: "Gilroy", sans-serif;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: #f9fafb;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  }
+
+  &.favourite {
+    &.active {
+      color: $color-danger;
+
+      svg {
+        fill: $color-danger;
+
+        path {
+          stroke: $color-danger;
+        }
+      }
+    }
+  }
+
+  &:active {
+    box-shadow: none;
+    transform: scale(0.95);
+  }
+}
+
+.katex-display > .katex {
+  white-space: normal;
+}
+
+/* Add space between broken lines: */
+.katex-display > .base {
+  margin: 0.25em 0;
+}
+
+/* Compensate by reducing space around display math */
+.katex-display {
+  margin: 0.5em 0;
+}

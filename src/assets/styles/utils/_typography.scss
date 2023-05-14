@@ -1,0 +1,45 @@
+@import "../abstracts/variables";
+
+.text {
+  &-center {
+    text-align: center;
+  }
+  &-right {
+    text-align: right;
+  }
+  &-uppercase {
+   text-transform: uppercase;
+  }
+  &-content {
+    white-space: pre-wrap;
+  }
+  &-left {
+    text-align: left;
+  }
+}
+@each $name, $color in (
+    ("main", $color-main),
+    ("danger", $color-danger),
+    ("trans-02", rgba(24, 24, 24, 0.2)),
+    ("trans-04", rgba(24, 24, 24, 0.4)),
+    ("red", #F23D5B),
+    ("orange", #F2994A),
+    ("yellow", #F2C94C),
+    ("green", #219653),
+    ("blue", #2F80ED),
+    ("violet", #9B51E0),
+    ("green-1", #6FCF97),
+    ("blue-1", #56CCF2),
+    ("purple", #BB6BD9),
+    ("gray", #738699),
+    ("yellow-1", #FADD56),
+    ("blue-2", #2063F0),
+) {
+  .color-#{$name} {
+    color: #{$color};
+  }
+}
+.nowrap {
+  white-space: nowrap;
+}
+
