@@ -69,7 +69,7 @@ export default {
 <style lang="scss" scoped>
 .page {
   &__wrap {
-    min-height: calc(100vh - 402px);
+    min-height: calc(100vh - 100px);
   }
 }
 </style>

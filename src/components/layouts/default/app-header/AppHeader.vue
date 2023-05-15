@@ -33,7 +33,6 @@
             <div
               class="header__language"
               :class="isMobileMedium ? '' : 'mr-20'"
-              v-if="!isMobileSmall"
               @click="languageDropdown = !languageDropdown"
               v-on-click-outside:excludedClass="hideLanguageDropdown"
             >
@@ -96,10 +95,10 @@
       </div>
     </header>
     <transition name="slide-right">
-      <!-- <NavigationDrawer
+      <NavigationDrawer
         v-if="navigationDrawer"
         @closeNavigationDrawer="closeDrawer"
-      /> -->
+      />
     </transition>
 
     <transition name="fade">
@@ -117,10 +116,11 @@ import "./header.scss";
 import AppButton from "../../../shared-components/AppButton";
 import i18n from "@/locales/i18n";
 import { mapActions, mapGetters, mapMutations } from "vuex";
+import NavigationDrawer from "./NavigationDrawer.vue";
 
 export default {
   name: "AppHeader",
-  components: { AppButton },
+  components: { AppButton, NavigationDrawer },
   data() {
     return {
       activeId: null,
