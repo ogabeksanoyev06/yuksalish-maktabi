@@ -1,9 +1,8 @@
 {
-    "en": {
-      "Biz haqimizda": "About",
-      "Online test": "Online test",
-      "Bog'lanish": "Contact",
-      "Yagiliklar": "News"
-    }
+  "en": {
+    "Biz haqimizda": "О нас",
+    "Online test": "Онлайн тест",
+    "Bog'lanish": "Контакт",
+    "Yagiliklar": "Новости"
   }
-  
+}

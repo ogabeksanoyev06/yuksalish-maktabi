@@ -23,7 +23,7 @@
                 :key="index"
               >
                 <router-link :to="item.link" class="header__menu-link">
-                  {{ item.title }}
+                  {{ $t(item.title) }}
                 </router-link>
               </li>
             </ul>
