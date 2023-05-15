@@ -21,7 +21,6 @@
                 class="header__menu-item"
                 v-for="(item, index) in menu"
                 :key="index"
-                v-on="handleShowDropdown(item.id)"
               >
                 <router-link :to="item.link" class="header__menu-link">
                   {{ item.title }}
@@ -47,20 +46,36 @@
                   <ul
                     class="header__dropdown-wrap bordered shadowed radius overflow"
                   >
-                    <li class="header__dropdown-item">
-                      <router-link to="/" class="header__dropdown-link pa-10">
+                    <li
+                      class="header__dropdown-item"
+                      @click="changeLanguage('uz')"
+                    >
+                      <span class="header__dropdown-link pa-10">
                         <AppText size="14" line-height="18" weight="700">
                           Uzbek
                         </AppText>
-                      </router-link>
+                      </span>
                     </li>
 
-                    <li class="header__dropdown-item">
-                      <router-link to="/" class="header__dropdown-link pa-10">
+                    <li
+                      class="header__dropdown-item"
+                      @click="changeLanguage('ru')"
+                    >
+                      <span class="header__dropdown-link pa-10">
                         <AppText size="14" line-height="18" weight="700">
                           Russian
                         </AppText>
-                      </router-link>
+                      </span>
+                    </li>
+                    <li
+                      class="header__dropdown-item"
+                      @click="changeLanguage('en')"
+                    >
+                      <span class="header__dropdown-link pa-10">
+                        <AppText size="14" line-height="18" weight="700">
+                          English
+                        </AppText>
+                      </span>
                     </li>
                   </ul>
                 </div>
@@ -100,7 +115,7 @@
 <script>
 import "./header.scss";
 import AppButton from "../../../shared-components/AppButton";
-import TokenService from "../../../../service/TokenService";
+import i18n from "@/locales/i18n";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 
 export default {
@@ -121,20 +136,20 @@ export default {
           title: "Yangiliklar",
           link: "/news",
         },
-        {
-          id: 3,
-          title: "Galereya",
-          link: "/s",
-        },
+        // {
+        //   id: 3,
+        //   title: "Galereya",
+        //   link: "/s",
+        // },
         {
           id: 4,
           title: "Online test",
-          link: "/s",
+          link: "/test",
         },
         {
           id: 5,
           title: "Bog'lanish",
-          link: "/s",
+          link: "/contact",
         },
       ],
       search: "",
@@ -155,134 +170,33 @@ export default {
     },
   },
   computed: {
-    ...mapGetters([
-      "isLoggedOn",
-      "skillTree",
-      "subjectTree",
-      "user",
-      "coursesOnBasket",
-      "favouriteCourses",
-    ]),
+    ...mapGetters([]),
   },
   methods: {
     closeDrawer() {
       this.navigationDrawer = false;
     },
-    ...mapMutations(["setAccessToken", "setIsLoggedOn"]),
-    ...mapActions([
-      "getSkillTree",
-      "getSubjectTree",
-      "getUser",
-      "getCoursesInBasket",
-      "getFavouriteCourses",
-      "getBoughtCourses",
-    ]),
+    ...mapMutations([]),
+    ...mapActions([]),
     showNavigationDrawer() {
       this.navigationDrawer = !this.navigationDrawer;
     },
-    hideAccountDropdown() {
-      this.accountDropdown = false;
-    },
+
     hideLanguageDropdown() {
       this.languageDropdown = false;
     },
-    handleShowDropdown(id) {
-      if (this.isMobile) {
-        return {
-          click: () => (this.activeId = this.activeId === id ? null : id),
-        };
-      }
-      return {
-        click: () => (this.activeId = this.activeId === id ? null : id),
-        mouseenter: () => (this.activeId = id),
-        mouseleave: () => (this.activeId = null),
-      };
-    },
-    handleShowDropdownInner(id) {
-      if (this.isMobile) {
-        return {
-          click: () => (this.subActiveId = this.subActiveId === id ? null : id),
-        };
-      }
-      return {
-        click: () => (this.subActiveId = this.subActiveId === id ? null : id),
-        mouseenter: () => (this.subActiveId = id),
-        mouseleave: () => (this.subActiveId = null),
-      };
-    },
-    prepareSkillCourseTree(data, menu) {
-      data.forEach((d) => {
-        let parentMenuModel = {
-          id: d.id,
-          title: d.name,
-          link: "",
-          children: [],
-        };
-        let childrenMenus = [];
-        if (d.courseList) {
-          d.courseList.forEach((children) => {
-            let childrenMenuModel = {
-              id: children.id,
-              title: children.name,
-              link: "",
-            };
-            childrenMenus.push(childrenMenuModel);
-          });
-          parentMenuModel.children = childrenMenus;
-        }
-        menu.push(parentMenuModel);
-      });
-    },
-    logout() {
-      this.$api
-        .delete(
-          "auth/Login/logout?refreshtoken=" + TokenService.getRefreshToken()
-        )
-        .then((data) => {
-          if (data.statusCode === 200) {
-            TokenService.removeToken();
-            TokenService.removeRefreshToken();
-            localStorage.clear();
-            this.setToken();
-          }
-        })
-        .catch((error) => {
-          console.log(error, " error");
-        });
-    },
-    setToken() {
-      this.setAccessToken(null);
-      this.setIsLoggedOn(false);
+    changeLanguage(lang) {
+      localStorage.setItem("lang", lang);
+      i18n.locale = lang;
+      this.lang = lang;
     },
   },
-  async mounted() {
-    if (this.userIsLoggedOn) {
-      await this.getUser();
+  created() {
+    if (!localStorage.getItem("lang")) {
+      localStorage.setItem("lang", "uz");
     }
-    await this.getSkillTree();
-    await this.getSubjectTree();
-    await this.getCoursesInBasket();
-    await this.getFavouriteCourses();
-    await this.getBoughtCourses();
-    this.menu[0].children = [];
-    this.prepareSkillCourseTree(this.skillTree, this.menu[0].children);
-    this.menu[1].children = [];
-    this.prepareSkillCourseTree(this.subjectTree, this.menu[1].children);
-  },
-  watch: {
-    skillTree() {
-      this.menu[0].children = [];
-      this.prepareSkillCourseTree(this.skillTree, this.menu[0].children);
-    },
-    subjectTree() {
-      this.menu[1].children = [];
-      this.prepareSkillCourseTree(this.subjectTree, this.menu[1].children);
-    },
-    async isLoggedOn() {
-      if (this.userIsLoggedOn) {
-        await this.getUser();
-      }
-    },
+    i18n.locale = localStorage.getItem("lang");
+    this.lang = localStorage.getItem("lang");
   },
 };
 </script>

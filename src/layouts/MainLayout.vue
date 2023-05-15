@@ -1,6 +1,7 @@
 <template>
   <div>
-    <AppHeader v-if="$route.path !== '/'" />
+    <HeroBanner v-if="$route.path == '/'" />
+    <AppHeader v-else />
     <div class="page__wrap">
       <router-view />
     </div>
@@ -13,10 +14,11 @@ import AppFooter from "../components/layouts/default/app-footer/AppFooter";
 import AppHeader from "@/components/layouts/default/app-header/AppHeader";
 import TokenService from "../service/TokenService";
 import { mapMutations } from "vuex";
+import HeroBanner from "@/components/pages/home/HeroBanner.vue";
 
 export default {
   name: "MainLayout",
-  components: { AppHeader, AppFooter },
+  components: { AppHeader, AppFooter, HeroBanner },
   methods: {
     ...mapMutations([
       "setWindowWidth",

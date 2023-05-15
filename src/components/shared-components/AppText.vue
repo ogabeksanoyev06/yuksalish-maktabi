@@ -62,7 +62,7 @@
         obj['--max-width'] = props.maxWidth + 'px';
       }
       if(props.letterSpacing) {
-        obj['--letter-spacing'] = props.letterSpacing + 'em';
+        obj['--letter-spacing'] = props.letterSpacing + 'px';
       }
       return obj;
     }
