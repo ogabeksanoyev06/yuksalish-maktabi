@@ -1,14 +1,12 @@
 import axios from "axios";
-import TokenService from "./TokenService";
 
 window.axios = axios;
-export let baseURL = "https://ocelot.miraman.uz/";
+export let baseURL = "http://yuksalishmaktabi.uz/api/";
 export default {
-  install: function(Vue) {
+  install: function (Vue) {
     axios.defaults.baseURL = baseURL;
     Vue.prototype.$api = {
       send(requestType, apiRoute, params = {}, data = null) {
-        this.setToken();
         return new Promise((resolve, reject) => {
           axios[requestType](baseURL + apiRoute, params ? params : [], data)
             .then((res) => {
@@ -43,7 +41,6 @@ export default {
           Accept: "application/json",
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
-          Authorization: "Bearer " + TokenService.getToken(),
         };
       },
     };

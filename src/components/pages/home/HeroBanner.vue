@@ -5,8 +5,8 @@
     </div>
     <div class="container">
       <div class="preview_content">
-        <p class="preview_content-title">yuksalish maktabi</p>
-        <p class="preview_content-text">Ta'lim va tarbiya birlashgan dargoh</p>
+        <p class="preview_content-title">{{ $t("title") }}</p>
+        <p class="preview_content-text">{{ $t("text") }}</p>
       </div>
     </div>
     <div class="preview_shadow">

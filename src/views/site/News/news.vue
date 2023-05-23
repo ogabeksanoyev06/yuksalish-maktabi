@@ -7,7 +7,7 @@
           :line-height="isMobile ? 28 : 36"
           weight="700"
         >
-          Yangiliklar
+          {{ $t("NewsTitle") }}
         </app-text>
       </div>
       <BlockWrap
@@ -34,7 +34,9 @@
               TDIU talabalari kelgusida o‘qishni Indoneziyada davom ettirishadi
             </div>
             <div class="d-flex flex-wrap justify-space-between">
-              <span class="section" style="color: #44494f">Yangiliklar</span>
+              <span class="section" style="color: #44494f">
+                {{ $t("NewsTitle") }}</span
+              >
               <span class="date" style="color: #9fabb9; text-align: right">
                 29 Aprel 2023
               </span>

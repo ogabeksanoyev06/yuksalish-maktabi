@@ -8,10 +8,10 @@
             :line-height="isMobile ? 28 : 36"
             weight="700"
           >
-            Gallereya
+            {{ $t("GalleryTitle") }}
           </app-text>
           <app-text size="14" line-height="18" weight="500" class="color-text">
-            Darslardan foto lavhalar
+            {{ $t("GalleryText") }}
           </app-text>
         </div>
       </div>

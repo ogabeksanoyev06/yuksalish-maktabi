@@ -136,11 +136,11 @@ export default {
           title: "Yangiliklar",
           link: "/news",
         },
-        // {
-        //   id: 3,
-        //   title: "Galereya",
-        //   link: "/s",
-        // },
+        {
+          id: 3,
+          title: "O'quvchilar ishlari",
+          link: "/works",
+        },
         {
           id: 4,
           title: "Online test",

@@ -7,16 +7,16 @@
           :line-height="isMobile ? 28 : 36"
           weight="700"
         >
-          Yangiliklar
+          {{ $t("NewsTitle") }}
         </app-text>
         <app-text size="14" line-height="18" weight="500" class="color-text">
-          Yangiliklardan boxabar bo‘ling
+          {{ $t("NewsText") }}
         </app-text>
       </div>
 
       <div class="section__top-details">
         <router-link class="section__top-link" to="/news">
-          <span> Barcha yangililar</span>
+          <span> {{ $t("AllNews") }}</span>
         </router-link>
       </div>
     </div>
@@ -38,7 +38,9 @@ export default {
   name: "NewsPage",
   components: { AppNewsCard, BlockWrap },
   data() {
-    return {};
+    return {
+      list: [],
+    };
   },
   methods: {
     goToLink(newsId) {
@@ -47,6 +49,26 @@ export default {
         params: { newsId: newsId },
       });
     },
+    async getNews() {
+      try {
+        await this.$api
+          .get("news/")
+          .then((data) => {
+            if (!data.error && data) {
+              this.list = data;
+            }
+          })
+          .catch((error) => {
+            console.log("Error on getting News" + ": " + error);
+          })
+          .finally(() => {});
+      } catch (e) {
+        console.log(e);
+      }
+    },
+  },
+  mounted() {
+    this.getNews();
   },
 };
 </script>

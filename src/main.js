@@ -11,10 +11,13 @@ import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
+import api from "./service/apiService";
 Vue.config.productionTip = false;
 Vue.component("AppText", AppText);
 Vue.component("AppLoading", Loading);
 Vue.use(ElementUI);
+Vue.use(api);
+
 import i18n from "./locales/i18n";
 import Util from "@/plugins/globalMethod";
 

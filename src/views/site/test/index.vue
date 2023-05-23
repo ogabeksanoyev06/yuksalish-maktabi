@@ -27,7 +27,7 @@
           <img src="/images/logo.png" alt="" />
         </div>
         <app-text class="color-white" size="16" line-height="24">
-          Ta'lim va tarbiya birlashgan dargoh
+          {{ $t("text") }}
         </app-text>
       </div>
     </div>

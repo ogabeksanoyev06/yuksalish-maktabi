@@ -34,7 +34,7 @@
             weight="600"
             class="mb-10 text-center color-main"
           >
-            Yuksalish maktabi
+            {{ $t("title") }}
           </app-text>
           <app-text
             class="color-text"
@@ -42,18 +42,7 @@
             line-height="24"
             letterSpacing="1.5"
           >
-            Muhammad Ali Eshonqulov - Xalqaro toifadagi iqtisodchi, Biznes va
-            Shaxsiy Rivojlanish bo'yicha trener Patronlar ligasi, Biznes Kvadrat
-            va Yuksalish loyihasining asoschisi Bizning maktabimizda 1-sinfdan
-            8-sinfgacha bòlgan òquvchilar òqishadi. Darslarimiz ertalab soat
-            9:00 dan 17:30 gacha bòlgan vaqt oraliģida bòlib òtadi. Ya'ni:
-            Davlat ta'lim standarti (DTS) bòyicha darslar 13:00 ga qadar, 13:00
-            dan 16:30 gacha bòlgan vaqtda chuqurlashtirib òrgatiladigan fanlar,
-            16:30 dan 17:20 gacha bòlgan vaqtda, haftada 3 kun òģil bolalar
-            uchun Taekwondo sport tògaraklari,qizlarimiz uchun Gimnastika sport
-            tògaraklari bòlib òtadi. Bizda chet tillaridan Arab tili va Ingliz
-            tili, Aniq fanlardan Matematika hamda Fizika fanlari
-            chuqurlashtirilib òqitiladi.
+            {{ $t("textM") }}
           </app-text>
         </div>
       </div>

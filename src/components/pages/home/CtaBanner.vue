@@ -32,7 +32,7 @@
 // import AppButton from "../../shared-components/AppButton";
 export default {
   name: "CtaBanner",
-  components: {  },
+  components: {},
   props: {
     title: String,
     content: String,

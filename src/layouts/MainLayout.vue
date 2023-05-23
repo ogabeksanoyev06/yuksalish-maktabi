@@ -12,7 +12,6 @@
 <script>
 import AppFooter from "../components/layouts/default/app-footer/AppFooter";
 import AppHeader from "@/components/layouts/default/app-header/AppHeader";
-import TokenService from "../service/TokenService";
 import { mapMutations } from "vuex";
 import HeroBanner from "@/components/pages/home/HeroBanner.vue";
 
@@ -20,44 +19,14 @@ export default {
   name: "MainLayout",
   components: { AppHeader, AppFooter, HeroBanner },
   methods: {
-    ...mapMutations([
-      "setWindowWidth",
-      "setAccessToken",
-      "setIsLoggedOn",
-      "setSelectedQuestionIndex",
-      "setSelectedSubjectId",
-      "setTestType",
-    ]),
+    ...mapMutations(["setWindowWidth"]),
     setWidth() {
       this.setWindowWidth(document.documentElement.clientWidth);
-    },
-    setToken() {
-      let accessToken = TokenService.getToken();
-      if (accessToken !== null) {
-        this.setAccessToken(accessToken);
-        this.setIsLoggedOn(true);
-      } else {
-        this.setAccessToken(null);
-        this.setIsLoggedOn(false);
-      }
-    },
-    setQuestionIndex() {
-      this.setSelectedQuestionIndex(this.checkQuestionIndex());
-    },
-    setSelectedSubjectIdInLayout() {
-      this.setSelectedSubjectId(this.getSelectedSubjectIdMixin());
-    },
-    setTestTypeInLayout() {
-      this.setTestType(this.getTestTypeFromStorage());
     },
   },
 
   mounted() {
-    this.setToken();
     this.setWidth();
-    this.setSelectedSubjectIdInLayout();
-    this.setQuestionIndex();
-    this.setTestTypeInLayout();
     window.addEventListener("resize", this.setWidth);
   },
   beforeDestroy() {

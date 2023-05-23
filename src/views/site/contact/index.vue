@@ -7,7 +7,7 @@
         weight="700"
         class="mb-30 text-center color-main"
       >
-        Anketani to'ldiring, biz imkon qadar tezroq siz bilan bog'lanamiz
+        {{ $t("Anketa") }}
       </app-text>
       <el-form
         label-position="top"
@@ -22,16 +22,16 @@
         "
       >
         <div class="items">
-          <el-form-item label="O'quvchining ismi">
+          <el-form-item :label="$t('ism')">
             <el-input v-model="ruleForm.firstname"></el-input>
           </el-form-item>
-          <el-form-item label="O'quvchining familiyasi">
+          <el-form-item :label="$t('familiya')">
             <el-input v-model="ruleForm.lastname"></el-input>
           </el-form-item>
-          <el-form-item label="Telefon raqam">
+          <el-form-item :label="$t('tel')">
             <el-input v-model="ruleForm.tel"></el-input>
           </el-form-item>
-          <el-form-item label="O'quvchining yoshi">
+          <el-form-item :label="$t('yosh')">
             <el-input v-model="ruleForm.age"></el-input>
           </el-form-item>
         </div>
@@ -43,7 +43,7 @@
             theme="main"
             @click="submitForm('ruleForm')"
           >
-            Yuborish
+            {{ $t("Yuborish") }}
           </app-button>
         </div>
       </el-form>
@@ -102,7 +102,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .items {
   max-width: 900px;
   width: 100%;

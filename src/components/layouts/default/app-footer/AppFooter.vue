@@ -14,7 +14,7 @@
                 weight="600"
                 class="mb-20"
               >
-                Bog'laning
+                {{ $t("Bog'laning") }}
               </app-text>
 
               <div class="footer__contacts-item">
@@ -46,17 +46,25 @@
                 weight="600"
                 class="mb-20"
               >
-                Linklar
+                {{ $t("Link") }}
               </app-text>
 
               <div class="footer__links">
-                <router-link to="/categories" tag="a"
-                  >Biz haqimizda</router-link
-                >
-                <router-link to="/subjects" tag="a">Yangiliklar</router-link>
-                <router-link to="/teaching" tag="a">Galereya</router-link>
-                <router-link to="/choose-test" tag="a">Online test</router-link>
-                <router-link to="/choose-test" tag="a">Bog'lanish</router-link>
+                <router-link to="/categories" tag="a">
+                  {{ $t("Biz haqimizda") }}
+                </router-link>
+                <router-link to="/subjects" tag="a">{{
+                  $t("Yangiliklar")
+                }}</router-link>
+                <router-link to="/teaching" tag="a">
+                  {{ $t("O'quvchilar ishlari") }}
+                </router-link>
+                <router-link to="/choose-test" tag="a">{{
+                  $t("Online test")
+                }}</router-link>
+                <router-link to="/choose-test" tag="a">{{
+                  $t("Bog'lanish")
+                }}</router-link>
               </div>
             </div>
           </div>
@@ -69,7 +77,7 @@
               line-height="21"
               class="mb-20"
             >
-              Ijtimoiy tarmoqlar
+              {{ $t("Tarmoqlar") }}
             </app-text>
 
             <div class="footer__socials-wrap">

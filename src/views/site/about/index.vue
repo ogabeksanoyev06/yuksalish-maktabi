@@ -8,7 +8,7 @@
           weight="700"
           class="color-main mb-20"
         >
-          Maktabning tashkil topishi
+          {{ $t("about") }}
         </app-text>
         <cta-banner
           title="Miramanda o'qiting"
@@ -25,7 +25,7 @@
           weight="700"
           class="color-main mb-20"
         >
-          Maktabning funksional vazifalari va maqsadi
+          {{ $t("maqsad") }}
         </app-text>
         <div class="benefits mb-30">
           <div class="benefits__item" v-for="(item, index) in 10" :key="index">
@@ -47,7 +47,7 @@
           weight="700"
           class="color-main mb-20"
         >
-          Bizning jamoa
+          {{ $t("jamoa") }}
         </app-text>
         <div class="items">
           <div class="item" v-for="item in 5" :key="item">
@@ -118,7 +118,7 @@
               height="40"
               class="w-100"
             >
-              Vazifalari
+              {{ $t("Vazifalari") }}
             </AppButton>
           </div>
         </div>

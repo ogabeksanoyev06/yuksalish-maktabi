@@ -53,7 +53,7 @@
                     ></path>
                   </svg>
                 </i>
-                Yangiliklar
+                {{ $t("NewsTitle") }}
               </a>
             </div>
             <span>
@@ -271,7 +271,7 @@
                       ></i>
                       14:52 - 2 May 2023
                     </span>
-                    <span class="cat-name">Yangiliklar</span>
+                    <span class="cat-name"> {{ $t("NewsTitle") }}</span>
                   </p>
                   <h6 class="title">
                     “Kelajak liderlari” maxsus malaka oshirish dasturining
