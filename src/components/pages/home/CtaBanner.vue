@@ -8,22 +8,9 @@
       class="cta__banner-content"
       :class="isDesktopSmall ? 'pa-30' : 'pa-60'"
     >
-      <!-- <app-text
-        :size="isMobile ? 26 : 30"
-        :line-height="isMobile ? 30 : 36"
-        weight="600"
-        class="mb-30"
-      >
-        {{ title }}
-      </app-text> -->
-
       <app-text class="color-text mb-30" size="16" line-height="24">
         {{ content }}
       </app-text>
-
-      <!-- <app-button theme="secondary" sides="20" font-size="14">
-        {{ buttonText }}
-      </app-button> -->
     </div>
   </div>
 </template>

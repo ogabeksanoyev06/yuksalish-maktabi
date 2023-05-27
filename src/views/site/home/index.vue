@@ -1,51 +1,62 @@
 <template>
   <div class="home-page">
-    <div class="container">
-      <div class="about py-30 mt-20">
-        <div class="card__photo" data-aos="fade-right">
-          <img
-            src="https://yuksalish-maktabi.vercel.app/images/muhammadaliEshonqulov.jpg"
-            alt=""
-          />
-          <a
-            href="https://www.youtube.com/watch?v=rtWW7nRu4II&t=2s"
-            target="_blank"
-          >
-            <button class="card__play">
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 11 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M10.5 6.13397C11.1667 6.51888 11.1667 7.48112 10.5 7.86602L1.5 13.0622C0.833332 13.4471 3.43203e-07 12.966 3.76852e-07 12.1962L8.31114e-07 1.80385C8.64763e-07 1.03405 0.833334 0.552922 1.5 0.937822L10.5 6.13397Z"
-                  fill="#00D06C"
-                ></path>
-              </svg>
-            </button>
-          </a>
-        </div>
-        <div class="text" data-aos="fade-left">
-          <app-text
-            :size="isMobile ? 26 : 30"
-            :line-height="isMobile ? 30 : 36"
-            weight="600"
-            class="mb-10 text-center color-main"
-          >
-            {{ $t("title") }}
-          </app-text>
-          <app-text
-            class="color-text"
-            size="16"
-            line-height="24"
-            letterSpacing="1.5"
-          >
-            {{ $t("textM") }}
-          </app-text>
+    <div
+      class=""
+      style="
+        background: url('https://stesting.uz/stestinglandingbg.png') no-repeat
+          50%;
+        background-size: cover;
+      "
+    >
+      <div class="container">
+        <div class="about">
+          <div class="card__photo" data-aos="fade-right">
+            <img
+              src="https://yuksalish-maktabi.vercel.app/images/muhammadaliEshonqulov.jpg"
+              alt=""
+            />
+            <a
+              href="https://www.youtube.com/watch?v=rtWW7nRu4II&t=2s"
+              target="_blank"
+            >
+              <button class="card__play">
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 11 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10.5 6.13397C11.1667 6.51888 11.1667 7.48112 10.5 7.86602L1.5 13.0622C0.833332 13.4471 3.43203e-07 12.966 3.76852e-07 12.1962L8.31114e-07 1.80385C8.64763e-07 1.03405 0.833334 0.552922 1.5 0.937822L10.5 6.13397Z"
+                    fill="#00D06C"
+                  ></path>
+                </svg>
+              </button>
+            </a>
+          </div>
+          <div class="text" data-aos="fade-left">
+            <app-text
+              :size="isMobile ? 26 : 30"
+              :line-height="isMobile ? 30 : 36"
+              weight="600"
+              class="mb-10 text-center color-main"
+            >
+              {{ $t("title") }}
+            </app-text>
+            <app-text
+              class="color-text"
+              size="16"
+              line-height="24"
+              letterSpacing="1.5"
+            >
+              {{ $t("textM") }}
+            </app-text>
+          </div>
         </div>
       </div>
+    </div>
+    <div class="container">
       <news />
       <GalleryClass />
     </div>
@@ -73,7 +84,6 @@ export default {
   display: flex;
   border-radius: 15px;
   align-items: center;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 10px;
   margin-top: 60px;
 }

@@ -24,7 +24,7 @@
 
                 <a href="tel: +998 91 123-45-67">
                   <app-text size="14" line-height="17" weight="600">
-                    +998 91 123-45-67
+                    +998 95 101 06 00
                   </app-text>
                 </a>
               </div>
@@ -35,7 +35,8 @@
                 </div>
 
                 <app-text size="14" line-height="17" weight="600">
-                  Toshkent shahri, Chilonzor tumani Muqimiy ko'chasi 1 uy
+                  Yuksalish maktabi, 200 Samarqand Darvoza ko'chasi, Tashkent,
+                  Oʻzbekiston
                 </app-text>
               </div>
             </div>

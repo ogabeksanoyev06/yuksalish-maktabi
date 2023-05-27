@@ -88,15 +88,16 @@ export default {
   &-title {
     font-size: 45px;
     font-weight: 700;
-    letter-spacing: 2px;
-    color: #fff;
+    letter-spacing: 1.3px;
+    color: #f39549;
     text-transform: uppercase;
     margin-bottom: 10px;
   }
   &-text {
+    font-weight: 700;
     font-size: 20px;
     letter-spacing: 10px;
-    color: #fff;
+    color: #f39549;
   }
 }
 .main-header .logo-box {
