@@ -1,7 +1,6 @@
 <template>
   <div class="home-page">
     <div
-      class=""
       style="
         background: url('https://stesting.uz/stestinglandingbg.png') no-repeat
           50%;
@@ -57,6 +56,53 @@
       </div>
     </div>
     <div class="container">
+      <div style="padding: 40px 0; margin-top: 20px">
+        <div class="section__top mb-30" data-aos="fade-right">
+          <div>
+            <app-text
+              :size="isMobile ? 18 : 30"
+              :line-height="isMobile ? 28 : 36"
+              weight="700"
+            >
+              Bizning kutubxona
+            </app-text>
+            <app-text
+              size="14"
+              line-height="18"
+              weight="500"
+              class="color-text"
+            >
+              Biz bilan natijaga erishing
+            </app-text>
+          </div>
+        </div>
+
+        <swiper class="swiper" ref="mySwiper" :options="swiperOptions">
+          <swiper-slide v-for="(item, index) in 5" :key="index">
+            <div class="item">
+              <a
+                href=""
+                style="
+                  padding: 0 15px;
+                  display: block;
+                  text-align: center;
+                  text-decoration: none;
+                  font-size: 1.2em;
+                  color: #3c495a;
+                  font-weight: 600;
+                "
+              >
+                <img
+                  src="https://uzbmb.uz/upload/file/menu/service/nm/Matematika.jpg"
+                  alt="service"
+                  style="width: 60%; display: block; margin: auto"
+                />
+                <span>Matematika</span>
+              </a>
+            </div>
+          </swiper-slide>
+        </swiper>
+      </div>
       <news />
       <GalleryClass />
     </div>
@@ -66,15 +112,46 @@
 <script>
 import News from "@/components/pages/home/News.vue";
 import GalleryClass from "@/components/pages/home/GalleryClass.vue";
-
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import "swiper/css/swiper.css";
 export default {
   name: "AppHome",
   components: {
     News,
     GalleryClass,
+    Swiper,
+    SwiperSlide,
   },
   data() {
-    return {};
+    return {
+      mySwiper: null, // Swiper o'zgaruvchisi
+      swiperOptions: {
+        autoplay: {
+          delay: 4000, // ms dan keyinroq autoplayni to'xtatish uchun
+          disableOnInteraction: false, // foydalanuvchi ro'yxatdan o'tganida autoplayni to'xtatish
+        },
+        loop: true, // sliderda loop yoqish
+        speed: 500, // o'tish tezligi
+        breakpoints: {
+          400: {
+            slidesPerView: 1,
+          },
+          576: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+          990: {
+            slidesPerView: 4,
+          },
+          1024: {
+            slidesPerView: 6,
+          },
+        },
+        spaceBetween: 30,
+      },
+    };
   },
 };
 </script>

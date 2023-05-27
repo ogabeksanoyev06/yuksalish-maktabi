@@ -13,8 +13,10 @@ import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import api from "./service/apiService";
 Vue.config.productionTip = false;
+import VueAwesomeSwiper from "vue-awesome-swiper";
 Vue.component("AppText", AppText);
 Vue.component("AppLoading", Loading);
+Vue.use(VueAwesomeSwiper);
 Vue.use(ElementUI);
 Vue.use(api);
 
