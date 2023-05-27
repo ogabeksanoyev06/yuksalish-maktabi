@@ -15,7 +15,8 @@
           </app-text>
         </div>
       </div>
-      <div>
+      <loader v-if="loading" />
+      <div v-else>
         <AppSlider :list="gallery" :slideCount="4" :perPage="3" class="mb-30">
           <template #default="{ item }">
             <div class="photo__item">
@@ -33,18 +34,21 @@
   </section>
 </template>
 <script>
+import Loader from "@/components/shared-components/Loader.vue";
 import AppSlider from "../../../components/shared-components/AppSlider";
 
 export default {
   name: "GalleryClass",
-  components: { AppSlider },
+  components: { AppSlider, Loader },
   data() {
     return {
       gallery: [],
+      loading: true,
     };
   },
   methods: {
     async getGallery() {
+      this.loading = true;
       try {
         await this.$api
           .get("art/")
@@ -55,8 +59,11 @@ export default {
           })
           .catch((error) => {
             console.log("Error on getting News" + ": " + error);
+            this.loading = false;
           })
-          .finally(() => {});
+          .finally(() => {
+            this.loading = false;
+          });
       } catch (e) {
         console.log(e);
       }

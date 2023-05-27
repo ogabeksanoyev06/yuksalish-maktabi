@@ -49,7 +49,8 @@
         >
           {{ $t("jamoa") }}
         </app-text>
-        <div class="items">
+        <loader v-if="loading" />
+        <div class="items" v-else>
           <div class="item" v-for="(item, i) in list" :key="i">
             <div class="img-wrap">
               <img
@@ -138,19 +139,22 @@
 <script>
 import CtaBanner from "@/components/pages/home/CtaBanner.vue";
 import AppButton from "@/components/shared-components/AppButton";
+import Loader from "@/components/shared-components/Loader.vue";
 
 export default {
   name: "AppAbout",
-  components: { CtaBanner, AppButton },
+  components: { CtaBanner, AppButton, Loader },
   data() {
     return {
       list: [],
       listId: {},
       centerDialogVisible: false,
+      loading: true,
     };
   },
   methods: {
     async getPerson() {
+      this.loading = true;
       try {
         await this.$api
           .get("person/")
@@ -161,10 +165,14 @@ export default {
           })
           .catch((error) => {
             console.log("Error on getting News" + ": " + error);
+            this.loading = false;
           })
-          .finally(() => {});
+          .finally(() => {
+            this.loading = false;
+          });
       } catch (e) {
         console.log(e);
+        this.loading = false;
       }
     },
     isModal(id) {

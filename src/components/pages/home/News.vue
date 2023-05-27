@@ -20,29 +20,34 @@
         </router-link>
       </div>
     </div>
-    <BlockWrap :count="isMobileSmall ? 1 : isDesktopSmall ? 2 : 3">
-      <AppNewsCard
-        v-for="(item, index) in list"
-        :key="index"
-        :id="item.id"
-        :title="item[$localeKey('name')]"
-        :photo="item.img"
-        data-aos="zoom-in-up"
-        :data-aos-delay="index * 50"
-        data-aos-duration="20000"
-      />
-    </BlockWrap>
+    <loader v-if="loading" />
+    <div v-else>
+      <BlockWrap :count="isMobileSmall ? 1 : isDesktopSmall ? 2 : 3">
+        <AppNewsCard
+          v-for="(item, index) in list"
+          :key="index"
+          :id="item.id"
+          :title="item[$localeKey('name')]"
+          :photo="item.img"
+          data-aos="zoom-in-up"
+          :data-aos-delay="index * 50"
+          data-aos-duration="20000"
+        />
+      </BlockWrap>
+    </div>
   </section>
 </template>
 <script>
 import AppNewsCard from "@/components/shared-components/AppNewsCard.vue";
 import BlockWrap from "@/components/shared-components/BlockWrap.vue";
+import Loader from "@/components/shared-components/Loader.vue";
 export default {
   name: "NewsPage",
-  components: { AppNewsCard, BlockWrap },
+  components: { AppNewsCard, BlockWrap, Loader },
   data() {
     return {
       list: [],
+      loading: true,
     };
   },
   methods: {
@@ -53,6 +58,7 @@ export default {
       });
     },
     async getNews() {
+      this.loading = true;
       try {
         await this.$api
           .get("news/")
@@ -63,8 +69,11 @@ export default {
           })
           .catch((error) => {
             console.log("Error on getting News" + ": " + error);
+            this.loading = false;
           })
-          .finally(() => {});
+          .finally(() => {
+            this.loading = false;
+          });
       } catch (e) {
         console.log(e);
       }

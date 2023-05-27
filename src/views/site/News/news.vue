@@ -10,50 +10,55 @@
           {{ $t("NewsTitle") }}
         </app-text>
       </div>
-      <BlockWrap
-        :count="
-          isMobileSmall ? 1 : isDesktopSmall ? 2 : isDesktopMedium ? 3 : 4
-        "
-      >
-        <div
-          class="page__news"
-          v-for="(item, index) in list"
-          :key="index"
-          :data-aos-delay="index * 50"
-          data-aos="fade-up"
-          data-aos-duration="20000"
-          @click="goToLink(item.id)"
+      <loader v-if="loading" />
+      <div v-else>
+        <BlockWrap
+          :count="
+            isMobileSmall ? 1 : isDesktopSmall ? 2 : isDesktopMedium ? 3 : 4
+          "
         >
-          <div class="page__news-photo">
-            <img :src="'http://yuksalishmaktabi.uz' + item.img" />
-          </div>
-          <div class="page__news-content">
-            <div class="page__news-title">
-              {{ item[$localeKey("name")] }}
+          <div
+            class="page__news"
+            v-for="(item, index) in list"
+            :key="index"
+            :data-aos-delay="index * 50"
+            data-aos="fade-up"
+            data-aos-duration="20000"
+            @click="goToLink(item.id)"
+          >
+            <div class="page__news-photo">
+              <img :src="'http://yuksalishmaktabi.uz' + item.img" />
             </div>
-            <div class="d-flex flex-wrap justify-space-between">
-              <span class="section" style="color: #44494f">
-                {{ $t("NewsTitle") }}</span
-              >
-              <span class="date" style="color: #9fabb9; text-align: right">
-                29 Aprel 2023
-              </span>
+            <div class="page__news-content">
+              <div class="page__news-title">
+                {{ item[$localeKey("name")] }}
+              </div>
+              <div class="d-flex flex-wrap justify-space-between">
+                <span class="section" style="color: #44494f">
+                  {{ $t("NewsTitle") }}</span
+                >
+                <span class="date" style="color: #9fabb9; text-align: right">
+                  29 Aprel 2023
+                </span>
+              </div>
+              <div class="line"></div>
             </div>
-            <div class="line"></div>
           </div>
-        </div>
-      </BlockWrap>
+        </BlockWrap>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import BlockWrap from "@/components/shared-components/BlockWrap.vue";
+import Loader from "@/components/shared-components/Loader.vue";
 export default {
   name: "AppNews",
-  components: { BlockWrap },
+  components: { BlockWrap, Loader },
   data() {
     return {
       list: [],
+      loading: true,
     };
   },
   methods: {
@@ -64,6 +69,7 @@ export default {
       });
     },
     async getNews() {
+      this.loading = true;
       try {
         await this.$api
           .get("news/")
@@ -74,10 +80,14 @@ export default {
           })
           .catch((error) => {
             console.log("Error on getting News" + ": " + error);
+            this.loading = false;
           })
-          .finally(() => {});
+          .finally(() => {
+            this.loading = false;
+          });
       } catch (e) {
         console.log(e);
+        this.loading = false;
       }
     },
   },

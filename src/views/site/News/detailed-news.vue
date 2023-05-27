@@ -1,7 +1,8 @@
 <template>
   <section class="section py-30">
     <div class="container">
-      <div class="main-content" data-aos="fade-up">
+      <loader v-if="loading" />
+      <div class="main-content" data-aos="fade-up" v-else>
         <h1 class="title mb-20">
           {{ list[$localeKey("name")] }}
         </h1>
@@ -259,17 +260,20 @@
   </section>
 </template>
 <script>
+import Loader from "@/components/shared-components/Loader.vue";
 export default {
   name: "AppNewsDetailed",
-  components: {},
+  components: { Loader },
   data() {
     return {
       list: {},
       news: [],
+      loading: true,
     };
   },
   methods: {
     async getNewsId() {
+      this.loading = true;
       try {
         await this.$api
           .get(`news/${this.$route.params.newsId}`)
@@ -280,8 +284,11 @@ export default {
           })
           .catch((error) => {
             console.log("Error on getting News" + ": " + error);
+            this.loading = false;
           })
-          .finally(() => {});
+          .finally(() => {
+            this.loading = false;
+          });
       } catch (e) {
         console.log(e);
       }
