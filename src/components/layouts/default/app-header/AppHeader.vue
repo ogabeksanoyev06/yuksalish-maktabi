@@ -1,9 +1,8 @@
 <template>
   <div>
     <header
-      class="header"
+      class="header greyBg"
       :class="{
-        greyBg: $route.path === '/',
         header__shadow: $route.path !== '/',
       }"
     >

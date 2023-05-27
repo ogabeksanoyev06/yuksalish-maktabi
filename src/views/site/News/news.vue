@@ -17,21 +17,19 @@
       >
         <div
           class="page__news"
-          v-for="(item, index) in 8"
+          v-for="(item, index) in list"
           :key="index"
           :data-aos-delay="index * 50"
           data-aos="fade-up"
           data-aos-duration="20000"
-          @click="goToLink(index)"
+          @click="goToLink(item.id)"
         >
           <div class="page__news-photo">
-            <img
-              src="https://tsue.uz/media/news/photo_2023-04-29_11-20-08.jpg"
-            />
+            <img :src="'http://yuksalishmaktabi.uz' + item.img" />
           </div>
           <div class="page__news-content">
             <div class="page__news-title">
-              TDIU talabalari kelgusida o‘qishni Indoneziyada davom ettirishadi
+              {{ item[$localeKey("name")] }}
             </div>
             <div class="d-flex flex-wrap justify-space-between">
               <span class="section" style="color: #44494f">
@@ -54,7 +52,9 @@ export default {
   name: "AppNews",
   components: { BlockWrap },
   data() {
-    return {};
+    return {
+      list: [],
+    };
   },
   methods: {
     goToLink(newsId) {
@@ -63,6 +63,26 @@ export default {
         params: { newsId: newsId },
       });
     },
+    async getNews() {
+      try {
+        await this.$api
+          .get("news/")
+          .then((data) => {
+            if (!data.error && data) {
+              this.list = data;
+            }
+          })
+          .catch((error) => {
+            console.log("Error on getting News" + ": " + error);
+          })
+          .finally(() => {});
+      } catch (e) {
+        console.log(e);
+      }
+    },
+  },
+  mounted() {
+    this.getNews();
   },
 };
 </script>

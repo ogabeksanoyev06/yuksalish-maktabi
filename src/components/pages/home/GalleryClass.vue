@@ -19,11 +19,11 @@
         <AppSlider :list="gallery" :slideCount="4" :perPage="3" class="mb-30">
           <template #default="{ item }">
             <div class="photo__item">
-              <img :src="item.image" alt="" style="" />
+              <img :src="'http://yuksalishmaktabi.uz' + item.img" />
               <div class="text">
-                <h5>Tanlov g‘olibi</h5>
-                <h6>Maftuna Normatova</h6>
-                <p>O‘z ustimda ishladim, rivojlandim</p>
+                <h6>{{ item[$localeKey("name")] }}</h6>
+                <!-- <h6>Maftuna Normatova</h6>
+                <p>O‘z ustimda ishladim, rivojlandim</p> -->
               </div>
             </div>
           </template>
@@ -40,29 +40,30 @@ export default {
   components: { AppSlider },
   data() {
     return {
-      gallery: [
-        {
-          id: 0,
-          image: "https://yuksalish-maktabi.vercel.app/lesson_imgs/lesson3.png",
-        },
-        {
-          id: 1,
-          image: "https://yuksalish-maktabi.vercel.app/lesson_imgs/lesson3.png",
-        },
-        {
-          id: 2,
-          image: "https://yuksalish-maktabi.vercel.app/lesson_imgs/lesson3.png",
-        },
-        {
-          id: 1,
-          image: "https://yuksalish-maktabi.vercel.app/lesson_imgs/lesson3.png",
-        },
-        {
-          id: 2,
-          image: "https://yuksalish-maktabi.vercel.app/lesson_imgs/lesson3.png",
-        },
-      ],
+      gallery: [],
     };
+  },
+  methods: {
+    async getGallery() {
+      try {
+        await this.$api
+          .get("art/")
+          .then((data) => {
+            if (!data.error && data) {
+              this.gallery = data;
+            }
+          })
+          .catch((error) => {
+            console.log("Error on getting News" + ": " + error);
+          })
+          .finally(() => {});
+      } catch (e) {
+        console.log(e);
+      }
+    },
+  },
+  mounted() {
+    this.getGallery();
   },
 };
 </script>
@@ -108,9 +109,8 @@ export default {
     }
     h6 {
       font-weight: 600;
-      font-size: 20px;
-      line-height: 24px;
-      letter-spacing: 0.01em;
+      font-size: 18px;
+      line-height: 22px;
       color: #fff;
       margin-top: 4px;
     }

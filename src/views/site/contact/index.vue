@@ -22,16 +22,18 @@
         "
       >
         <div class="items">
-          <el-form-item :label="$t('ism')">
+          <el-form-item :label="$t('ism')" prop="firstname">
             <el-input v-model="ruleForm.firstname"></el-input>
           </el-form-item>
-          <el-form-item :label="$t('familiya')">
+          <el-form-item :label="$t('familiya')" prop="lastname">
             <el-input v-model="ruleForm.lastname"></el-input>
           </el-form-item>
-          <el-form-item :label="$t('tel')">
-            <el-input v-model="ruleForm.tel"></el-input>
+          <el-form-item :label="$t('tel')" prop="tel">
+            <el-input v-model="ruleForm.tel">
+              <template slot="prepend">+998</template>
+            </el-input>
           </el-form-item>
-          <el-form-item :label="$t('yosh')">
+          <el-form-item :label="$t('yosh')" prop="age">
             <el-input v-model="ruleForm.age"></el-input>
           </el-form-item>
         </div>
@@ -59,6 +61,7 @@
 </template>
 <script>
 import AppButton from "@/components/shared-components/AppButton.vue";
+// import axios from "axios";
 export default {
   name: "AppContact",
   components: { AppButton },
@@ -75,13 +78,46 @@ export default {
           {
             required: true,
             message: "Maydon bo'sh bo'lmasligi kerak!",
-            trigger: "blur",
+            trigger: "change",
           },
           {
             min: 3,
             max: 30,
             message: "Belgilar soni ",
-            trigger: "blur",
+            trigger: "change",
+          },
+        ],
+        lastname: [
+          {
+            required: true,
+            message: "Maydon bo'sh bo'lmasligi kerak!",
+            trigger: "change",
+          },
+          {
+            min: 3,
+            max: 30,
+            message: "Belgilar soni ",
+            trigger: "change",
+          },
+        ],
+        tel: [
+          {
+            required: true,
+            message: "Maydonni to'dirish shart !",
+            trigger: "change",
+          },
+          {
+            min: 9,
+            max: 9,
+            message: "Belgilar soni kamida 9 ta bo'lishi kerak !",
+            trigger: "change",
+          },
+        ],
+        age: [
+          {
+            required: true,
+            message: "Maydon bo'sh bo'lmasligi kerak!",
+            trigger: "change",
           },
         ],
       },
@@ -91,7 +127,25 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert("submit!");
+          try {
+            this.$api
+              .post(`feedback/`, {
+                name: this.ruleForm.firstname,
+                number: "+998" + this.ruleForm.tel,
+                message: this.ruleForm.age,
+              })
+              .then((data) => {
+                if (!data.error && data) {
+                  console(data);
+                }
+              })
+              .catch((error) => {
+                console.log("Error on getting News" + ": " + error);
+              })
+              .finally(() => {});
+          } catch (e) {
+            console.log(e);
+          }
         } else {
           console.log("error submit!!");
           return false;

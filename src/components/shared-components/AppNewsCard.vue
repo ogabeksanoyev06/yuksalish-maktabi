@@ -1,11 +1,11 @@
 <template>
   <div class="card__news" @click="goToLink(1)">
     <div class="card__news-photo">
-      <img src="https://tsue.uz/media/news/photo_2023-04-29_11-20-08.jpg" />
+      <img :src="'http://yuksalishmaktabi.uz' + photo" />
     </div>
     <div class="card__news-content">
       <div class="card__news-title">
-        TDIU talabalari kelgusida o‘qishni Indoneziyada davom ettirishadi
+        {{ title }}
       </div>
       <div class="d-flex flex-wrap justify-space-between">
         <span class="section" style="color: #44494f">

@@ -4,11 +4,7 @@
 .header {
   position: relative;
   z-index: 3;
-  &.header__shadow {
-    .header__menu-item {
-      color: $color-text !important;
-    }
-  }
+
   &__inner {
     display: flex;
     align-items: center;
@@ -59,7 +55,7 @@
 
     &-link {
       &.router-link-exact-active {
-        color: $color-main;
+        // color: $color-main;
 
         &::before {
           content: "";
@@ -71,7 +67,7 @@
           height: 4px;
           border-radius: 50%;
           overflow: hidden;
-          background-color: $color-main;
+          background-color: #fff;
           text-align: center;
         }
       }

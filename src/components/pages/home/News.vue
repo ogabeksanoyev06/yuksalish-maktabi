@@ -22,8 +22,11 @@
     </div>
     <BlockWrap :count="isMobileSmall ? 1 : isDesktopSmall ? 2 : 3">
       <AppNewsCard
-        v-for="(item, index) in 3"
+        v-for="(item, index) in list"
         :key="index"
+        :id="item.id"
+        :title="item[$localeKey('name')]"
+        :photo="item.img"
         data-aos="zoom-in-up"
         :data-aos-delay="index * 50"
         data-aos-duration="20000"

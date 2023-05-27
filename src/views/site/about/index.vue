@@ -50,7 +50,7 @@
           {{ $t("jamoa") }}
         </app-text>
         <div class="items">
-          <div class="item" v-for="item in 5" :key="item">
+          <div class="item" v-for="(item, i) in list" :key="i">
             <div class="img-wrap">
               <img
                 src="data:image/jpeg;base64,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"
@@ -58,11 +58,11 @@
                 class="lazyLoad isLoaded"
               />
             </div>
-            <h6>Muhammadali Eshonqulov Olimjon o'g'li</h6>
-            <p class="short-txt">
+            <h6>{{ item[$localeKey("name")] }}</h6>
+            <!-- <p class="short-txt">
               Markaz rahbari <br />
               Qabul kuni: Juma — 15:00 — 17:00
-            </p>
+            </p> -->
             <ul>
               <li>
                 <i>
@@ -81,7 +81,7 @@
                     ></path>
                   </svg>
                 </i>
-                <a href="tel:71- 239-58-73">+998 91 123 45 67</a>
+                <a :href="`tel:${item.number}`">{{ item.number }}</a>
               </li>
               <li>
                 <i>
@@ -106,9 +106,10 @@
                     ></path>
                   </svg>
                 </i>
-                <a href="mailto:info@argos.uz">v.karimov@tsue.uz</a>
+                <a :href="item.email">{{ item.email }}</a>
               </li>
             </ul>
+
             <AppButton
               theme="secondary"
               :font-size="isMobileSmall ? 12 : isMobile ? 14 : 16"
@@ -117,10 +118,18 @@
               v-if="!isDesktopSmall"
               height="40"
               class="w-100"
+              @click="isModal(item.id)"
             >
               {{ $t("Vazifalari") }}
             </AppButton>
           </div>
+          <el-dialog
+            :title="listId[$localeKey('name')]"
+            :visible.sync="centerDialogVisible"
+            center
+          >
+            {{ listId[$localeKey("title")] }}
+          </el-dialog>
         </div>
       </div>
     </div>
@@ -134,11 +143,45 @@ export default {
   name: "AppAbout",
   components: { CtaBanner, AppButton },
   data() {
-    return {};
+    return {
+      list: [],
+      listId: {},
+      centerDialogVisible: false,
+    };
+  },
+  methods: {
+    async getPerson() {
+      try {
+        await this.$api
+          .get("person/")
+          .then((data) => {
+            if (!data.error && data) {
+              this.list = data;
+            }
+          })
+          .catch((error) => {
+            console.log("Error on getting News" + ": " + error);
+          })
+          .finally(() => {});
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    isModal(id) {
+      this.list.forEach((element) => {
+        if (element.id == id) {
+          this.listId = element;
+          this.centerDialogVisible = true;
+        }
+      });
+    },
+  },
+  mounted() {
+    this.getPerson();
   },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .items {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -201,6 +244,10 @@ export default {
         font-size: 0.9rem;
       }
     }
+  }
+  .el-dialog {
+    max-width: 860px;
+    width: 100%;
   }
 }
 .benefits {

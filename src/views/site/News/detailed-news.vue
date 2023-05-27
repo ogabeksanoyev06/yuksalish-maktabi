@@ -3,12 +3,12 @@
     <div class="container">
       <div class="main-content" data-aos="fade-up">
         <h1 class="title mb-20">
-          Davlat xizmati tizimi transformatsiyasi: milliy va xorijiy tajriba
+          {{ list[$localeKey("name")] }}
         </h1>
         <div class="single-page">
           <div class="info d-flex align-center justify-space-between">
             <div class="left-info">
-              <span>
+              <!-- <span>
                 <i>
                   <svg
                     width="24"
@@ -35,8 +35,8 @@
                   </svg>
                 </i>
                 16:18 - 1 May 2023
-              </span>
-              <a href="/oz/press-center/news/category/news" class="cat-news">
+              </span> -->
+              <router-link to="/news" class="cat-news">
                 <i>
                   <svg
                     width="24"
@@ -54,7 +54,7 @@
                   </svg>
                 </i>
                 {{ $t("NewsTitle") }}
-              </a>
+              </router-link>
             </div>
             <span>
               <i>
@@ -77,47 +77,17 @@
             </span>
           </div>
           <div class="content-wrap">
-            <p>
+            <!-- <p>
               Bugun Davlat xizmatini rivojlantirish agentligi va Davlat
               boshqaruvi akademiyasi hamkorligida shu mavzuda davra suhbati
               tashkil etildi.
-            </p>
+            </p> -->
             <div class="img-wrap">
-              <img
-                src="https://argos.uz/media/news/photo_2023-05-01_15-23-52.jpg"
-                alt=""
-              />
+              <img :src="'http://yuksalishmaktabi.uz' + list.img" alt="" />
             </div>
             <div>
               <p>
-                Unda hamkor tashkilotlar rahbariyati, Koreya Respublikasi Yonsey
-                universiteti vakili, vazirlik va idoralarning inson resurslarini
-                boshqarish va rivojlantirish bo‘yicha masʼul xodimlari, soha
-                ekspertlari hamda OAV ishtirok etdi.
-              </p>
-
-              <p>
-                Uchrashuv avvalida oxirgi yillarda mamlakatimizda davlat
-                boshqaruvi va kadrlar sohasiga oid amalga oshirilayotgan ishlar
-                haqida maʼlum qilindi. Sohada O‘zbekiston tajribasi,
-                erishilayotgan natijalar haqida so‘z bordi.
-              </p>
-
-              <p>
-                Shundan so‘ng, Koreya Respublikasi Yonsey universiteti
-                professori, sobiq Personalni boshqarish vaziri Kim Pan Sok
-                davlat xizmatini isloh qilish bo‘yicha Koreya Respublikasi
-                tajribasi haqida taqdimot qildi. Davlat fuqarolik xizmati
-                tizimini samarali tashkil qilish yuzasidan o‘z
-                fikr-mulohazalari, takliflari bilan o‘rtoqlashdi.
-              </p>
-
-              <p>
-                Uchrashuvda O‘zbekistonda natijadorlikka yo‘naltirilgan davlat
-                boshkaruvini shakllantirishda maʼmuriy islohotlarni amalga
-                oshirishning istiqbollari hamda davlat fuqarolik xizmati tizimi
-                rivojlanishining asosiy yo‘nalishlari yuzasidan bahs-munozalar
-                tashkil etildi.
+                {{ list[$localeKey("title")] }}
               </p>
             </div>
 
@@ -226,7 +196,7 @@
                     </g>
                   </svg>
                 </i>
-                <span>Chop etish</span>
+                <button @click="printPage">Chop etish</button>
               </div>
             </div>
           </div>
@@ -237,11 +207,14 @@
             </h3>
             <div class="items">
               <div class="inner">
-                <div class="item" v-for="item in 6" :key="item">
+                <div
+                  class="item"
+                  v-for="item in news"
+                  :key="item.id"
+                  @click="goToLink(item.id)"
+                >
                   <div class="item-img">
-                    <img
-                      src="https://argos.uz/media/news/photo_2023-05-02_10-54-27.jpg"
-                    />
+                    <img :src="'http://yuksalishmaktabi.uz' + item.img" />
                   </div>
                   <p>
                     <span>
@@ -274,8 +247,7 @@
                     <span class="cat-name"> {{ $t("NewsTitle") }}</span>
                   </p>
                   <h6 class="title">
-                    “Kelajak liderlari” maxsus malaka oshirish dasturining
-                    4-mavsumi o‘quvlari boshlandi
+                    {{ item[$localeKey("name")] }}
                   </h6>
                 </div>
               </div>
@@ -291,8 +263,74 @@ export default {
   name: "AppNewsDetailed",
   components: {},
   data() {
-    return {};
+    return {
+      list: {},
+      news: [],
+    };
   },
+  methods: {
+    async getNewsId() {
+      try {
+        await this.$api
+          .get(`news/${this.$route.params.newsId}`)
+          .then((data) => {
+            if (!data.error && data) {
+              this.list = data[0];
+            }
+          })
+          .catch((error) => {
+            console.log("Error on getting News" + ": " + error);
+          })
+          .finally(() => {});
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    async getNews() {
+      try {
+        await this.$api
+          .get(`news/`)
+          .then((data) => {
+            if (!data.error && data) {
+              this.news = [];
+              data.forEach((element) => {
+                console.log(element);
+                if (element.id != this.$route.params.newsId) {
+                  this.news.push(element);
+                }
+              });
+            }
+          })
+          .catch((error) => {
+            console.log("Error on getting News" + ": " + error);
+          })
+          .finally(() => {});
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    goToLink(id) {
+      this.$router.push({
+        name: "detailed-news",
+        params: { newsId: id },
+      });
+    },
+    printPage() {
+      window.print();
+    },
+  },
+  watch: {
+    $route() {
+      this.getNewsId();
+      this.getNews();
+    },
+  },
+  mounted() {
+    this.$route.params.newsId;
+    this.getNewsId();
+    this.getNews();
+  },
+  created() {},
 };
 </script>
 <style lang="scss" scoped>
